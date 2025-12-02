@@ -11,6 +11,7 @@ import Thumbnail3 from '../assets/images/image-product-3-thumbnail.jpg'
 import Product4 from '../assets/images/image-product-4.jpg'
 import Thumbnail4 from '../assets/images/image-product-4-thumbnail.jpg'
 import LightBox from './LightBox'
+import NextButton from '../assets/images/icon-next.svg'
 
 import useScreenWidth from '../hooks/useScreenWidth'
 
@@ -67,8 +68,10 @@ function Carousel() {
             </div>
         </div>
     </> : <>
-        <div className='w-full bg-black mt-18'>
-            <img src={image[imageIndex].product} alt={image[imageIndex].alt} />
+        <div className='w-full mt-18 relative'>
+            <img onClick={()=>setImageIndex(prev=> ((prev-1)+4)%4)} className='rotate-180 style-next left-2' src={NextButton} alt="prev-button" />
+            <img className='h-dvw' src={image[imageIndex].product} alt={image[imageIndex].alt} />
+            <img onClick={() => setImageIndex(prev => (prev + 1) % 4)} className='style-next' src={NextButton} alt="next-button" />
         </div>
     </>)
 }

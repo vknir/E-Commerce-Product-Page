@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import useCount from '../context/count-context'
 import CartSection from "./CartSection";
 
+
 function Navbar() {
 
     const [render, setRender] = useState<boolean>(false)
@@ -17,7 +18,7 @@ function Navbar() {
     const screenWidth = useScreenWidth();
 
     const handleClick = () => {
-        console.log('hello')
+        
         if (!render)
             setRender(true)
         setDisplayMenu(true)
@@ -28,7 +29,7 @@ function Navbar() {
             setRender(false)
     }, [screenWidth])
 
-    const { count, cart, setCart , checkout} = useCount()
+    const { count, cart, setCart, checkout } = useCount()
 
     return <>
         {
@@ -53,27 +54,31 @@ function Navbar() {
                             </button>
                             <img className="size-12 border-2 rounded-full border-white hover:border-oragne-100 hover:cursor-pointer transition-colors duration-100 ease-in " src={Pfp} alt="profile-photo" />
                         </div>
-                        { cart && <CartSection/> }
+                        {cart && <CartSection />}
                     </nav>
-                  
+
                 </>
                 :
 
                 <>
                     <div className="fixed p-5 flex left-0 right-0 z-10 justify-between">
                         <div className="flex items-center gap-10">
-                           <button> <img className="size-5" src={Menu} onClick={()=>handleClick()} alt="menu-icon" /></button>
+                            <button> <img className="size-5" src={Menu} onClick={() => handleClick()} alt="menu-icon" /></button>
+
                             <img src={Logo} alt="logo-icon" />
                         </div>
-                        <div className="flex gap-10 items-center " >
-                            <img src={Cart} alt="cart-icon" />
+                        <div className="flex gap-10 items-center" >
+                            <button onClick={() => setCart(prev => !prev)} className="relative pt-2 pr-3 hover:cursor-pointer ">
+                                {checkout && <p className="absolute bg-oragne-100 text-white px-2 py-0 text-[10px] top-0 right-0 rounded-full" >{count}</p>}
+                                <img src={Cart} alt="cart-icon" />
+                            </button>
                             <img className="size-8 border-2 rounded-full border-white hover:border-oragne-100 hover:cursor-pointer transition-colors duration-100 ease-in " src={Pfp} alt="profile-photo" />
                         </div>
-
+                        {cart && <CartSection />}
                     </div>
                     {render &&
                         <>
-                            <div className={`fixed p-7 top-0 z-20  w-[65%] bg-white h-dvh flex flex-col gap-14 ${dispalyMenu ? ' animate-slide-in-left left-0' : ' animate-slide-out-left  right-full'} `}>
+                            <div className={`fixed p-7 top-0 z-50  w-[65%] bg-white h-dvh flex flex-col gap-14 ${dispalyMenu ? ' animate-slide-in-left left-0' : ' animate-slide-out-left  right-full'} `}>
                                 <img className="size-4" src={Close} alt="close-icon" onClick={() => setDisplayMenu(false)} />
                                 <nav className="flex flex-col gap-5 font-bold ">
                                     <a href="#">Collections</a>
@@ -83,7 +88,7 @@ function Navbar() {
                                     <a href="#">Contact</a>
                                 </nav>
                             </div>
-                            <div className={`fixed top-0 z-20 w-[35%] bg-black opacity-75 h-dvh ${dispalyMenu ? ' animate-slide-in-right  right-0' : ' animate-slide-out-right -right-full'} `}></div>
+                            <div className={`fixed top-0 z-50 w-[35%] bg-black opacity-75 h-dvh ${dispalyMenu ? ' animate-slide-in-right  right-0' : ' animate-slide-out-right -right-full'} `}></div>
                         </>
                     }
                 </>
