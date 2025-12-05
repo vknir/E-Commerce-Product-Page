@@ -43,7 +43,7 @@ function Hero() {
                     <p className="font-bold">{count}</p>
                     <button onClick={decreaseCount} className="hover:cursor-pointer p-2 "><img src={Minus} alt="minus image" /></button>
                 </div>
-                <button onClick={() => { if (count) setCheckout(true) }} className="flex gap-4 bg-oragne-100 w-full justify-center py-3 rounded-xl font-semibold hover:cursor-pointer hover:opacity-70 transition-all duration-100">
+                <button onClick={() => { if (count) setCheckout(true) }} className="flex gap-4 bg-oragne-100 w-full justify-center py-4 rounded-xl font-semibold hover:cursor-pointer hover:opacity-70 transition-all duration-100">
                     <img src={Cart} alt="cart image" />
                     Add to cart
                 </button>
